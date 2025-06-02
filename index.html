@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic Notes ROI Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="calculator">
+        <div class="inputs">
+            <h2>Inputs</h2>
+            <label>
+                Number of Users<br>
+                <input type="number" id="numUsers" min="1" value="10">
+            </label>
+            <label>
+                Magic Notes Hours/Week<br>
+                <input type="number" id="notesHours" min="0" value="3">
+            </label>
+            <label>
+                Admin Hours/Week<br>
+                <input type="number" id="adminHours" min="0" value="6">
+            </label>
+            <label>
+                Manager Hourly Cost (£/hr)<br>
+                <input type="number" id="hourlyCost" min="1" value="25">
+            </label>
+            <button id="calculateBtn">Calculate</button>
+        </div>
+        <div class="outputs">
+            <h2>Outputs</h2>
+            <div class="output-row">
+                <span>Total Hours per Year:</span>
+                <span id="totalHoursYear">—</span>
+            </div>
+            <div class="output-row">
+                <span>Magic Notes Annual Cost (£):</span>
+                <span id="annualCost">—</span>
+            </div>
+            <div class="output-row">
+                <span>Time Saved per User/Week (hrs):</span>
+                <span id="timeSavedPerUser">—</span>
+            </div>
+            <div class="output-row">
+                <span>Total Time Saved per Year (hrs):</span>
+                <span id="totalTimeSaved">—</span>
+            </div>
+            <div class="output-row">
+                <span>Value of Time Saved (£):</span>
+                <span id="financialValue">—</span>
+            </div>
+            <div class="output-row roi-row">
+                <span>ROI (%):</span>
+                <span id="roi">—</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
