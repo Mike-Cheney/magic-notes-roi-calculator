@@ -9,8 +9,14 @@ function calculateROI() {
     const adminHours = parseFloat(document.getElementById('adminHours').value) || 0;
     const hourlyCost = parseFloat(document.getElementById('hourlyCost').value) || 0;
 
-    // Step 1: Total Hours per Year (users × notesHours × 52)
-    const totalHoursYear = users * notesHours * 52;
+    // Use 47 weeks to account for leave
+    const weeksPerYear = 47;
+
+    // Step 1: Total Magic Notes Hours per Year (users × notesHours × 47)
+    let totalHoursYear = users * notesHours * weeksPerYear;
+
+    // Enforce minimum of 600 hours for both display and all downstream calculations
+    totalHoursYear = Math.max(totalHoursYear, 600);
 
     // Step 2: Sliding scale for annual cost
     let rate = 5;
@@ -35,7 +41,7 @@ function calculateROI() {
     const timeSavedPerUser = adminHours - notesHours;
 
     // Step 4: Total time saved per year (timeSavedPerUser × users × 47)
-    const totalTimeSaved = timeSavedPerUser * users * 47;
+    const totalTimeSaved = timeSavedPerUser * users * weeksPerYear;
 
     // Step 5: Financial value of time saved
     const financialValue = totalTimeSaved * hourlyCost;
@@ -49,7 +55,7 @@ function calculateROI() {
     document.getElementById('timeSavedPerUser').textContent = timeSavedPerUser.toLocaleString('en-GB', {maximumFractionDigits: 2});
     document.getElementById('totalTimeSaved').textContent = totalTimeSaved.toLocaleString('en-GB', {maximumFractionDigits: 2});
     document.getElementById('financialValue').textContent = formatGBP(financialValue);
-    
+
     const roiElem = document.getElementById('roi');
     roiElem.textContent = roi.toLocaleString('en-GB', {maximumFractionDigits: 2}) + "%";
     roiElem.classList.remove('positive-roi', 'negative-roi');
