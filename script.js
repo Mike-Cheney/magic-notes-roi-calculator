@@ -37,8 +37,8 @@ function calculateROI() {
     }
     const annualCost = totalHoursYear * rate;
 
-    // Step 3: Time saved per user per week
-    const timeSavedPerUser = adminHours - notesHours;
+    // Step 3: Time saved per user per week (39% of adminHours)
+    const timeSavedPerUser = adminHours > 0 ? adminHours * 0.39 : 0;
 
     // Step 4: Total time saved per year (timeSavedPerUser × users × 47)
     const totalTimeSaved = timeSavedPerUser * users * weeksPerYear;
