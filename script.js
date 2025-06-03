@@ -2,6 +2,26 @@ function formatGBP(value) {
     return '£' + Number(value).toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
 
+const weeksPerYear = 47;
+const hoursPerWeek = 37.5; // You can change this if needed
+
+const annualSalaryInput = document.getElementById('annualSalary');
+const hourlyCostInput = document.getElementById('hourlyCost');
+
+// When annual salary changes, update hourly cost
+annualSalaryInput.addEventListener('input', function() {
+    const annualSalary = parseFloat(annualSalaryInput.value) || 0;
+    const hourly = annualSalary / (weeksPerYear * hoursPerWeek);
+    hourlyCostInput.value = hourly > 0 ? hourly.toFixed(2) : '';
+});
+
+// When hourly cost changes, update annual salary
+hourlyCostInput.addEventListener('input', function() {
+    const hourly = parseFloat(hourlyCostInput.value) || 0;
+    const annualSalary = hourly * weeksPerYear * hoursPerWeek;
+    annualSalaryInput.value = annualSalary > 0 ? annualSalary.toFixed(2) : '';
+});
+
 function calculateROI() {
     // Inputs
     const users = parseInt(document.getElementById('numUsers').value, 10) || 0;
