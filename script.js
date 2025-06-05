@@ -41,16 +41,18 @@ function calculateROI() {
 
     // Step 2: Sliding scale for annual cost
     let rate = 5;
-    if (totalHoursYear > 150000) {
+    if (totalHoursYear >= 150000) {
         rate = 1.5;
-    } else if (totalHoursYear > 50000) {
+    } else if (totalHoursYear >= 100000) {
         rate = 1.75;
-    } else if (totalHoursYear > 25000) {
+    } else if (totalHoursYear >= 50000) {
         rate = 2.25;
-    } else if (totalHoursYear > 12000) {
-        rate = 3;
-    } else if (totalHoursYear > 6000) {
-        rate = 4;
+    } else if (totalHoursYear >= 25000) {
+        rate = 3.0;
+    } else if (totalHoursYear >= 12000) {
+        rate = 4.0;
+    } else {
+        rate = 5.0;
     }
     const annualCost = totalHoursYear * rate;
 
