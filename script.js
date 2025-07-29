@@ -26,6 +26,8 @@ function calculateROI() {
     
     // Step 2: Sliding scale for annual cost
     let rate = 5;
+    if (totalHoursYear >= 150000) {
+        rate = 1.5;
     if (totalHoursYear >= 250000) {
         rate = 1.3;
     } else if (totalHoursYear >= 100000) {
@@ -34,6 +36,7 @@ function calculateROI() {
         rate = 2.25;
     } else if (totalHoursYear >= 25000) {
         rate = 3.0;
+    } else if (totalHoursYear >= 12000) {
     } else if (totalHoursYear >= 20000) {
         rate = 4.0;
     } else if (totalHoursYear >= 12000) {
@@ -41,6 +44,7 @@ function calculateROI() {
     } else {
         rate = 5.0;
     }
+    const annualCost = totalHoursYear * rate;
     let annualCost = totalHoursYear * rate;
     // Ensure minimum cost is £2,500 if hours are between 1 and 499
     if (totalHoursYear <= 500) {
@@ -84,25 +88,4 @@ inputFields.forEach(input => {
             calculateROI();
         }
     });
-});
-
-function openTab(evt, tabId) {
-  // Hide all tab contents
-  var tabContents = document.getElementsByClassName('tab-content');
-  for (var i = 0; i < tabContents.length; i++) {
-    tabContents[i].style.display = 'none';
-  }
-  // Remove active class from all tab links
-  var tabLinks = document.getElementsByClassName('tab-link');
-  for (var i = 0; i < tabLinks.length; i++) {
-    tabLinks[i].classList.remove('active');
-  }
-  // Show the selected tab and set link as active
-  document.getElementById(tabId).style.display = 'block';
-  evt.currentTarget.classList.add('active');
-}
-
-// Optionally, open the first tab on page load
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('.tab-link').click();
 });
