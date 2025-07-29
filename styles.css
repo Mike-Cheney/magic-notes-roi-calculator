@@ -62,10 +62,6 @@ button {
     margin-top: 8px;
 }
 
-button:hover {
-    background: #2227d6;
-}
-
 .outputs {
     background: #f8faff;
     border-radius: 8px;
