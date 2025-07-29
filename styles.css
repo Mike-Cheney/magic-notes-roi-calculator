@@ -87,7 +87,7 @@ button:hover {
 .roi-row span:last-child {
     font-size: 1.5rem;
     font-weight: bold;
-    transition: color 0.2s;
+    transition: color 0.4s ease;
 }
 
 .positive-roi {
