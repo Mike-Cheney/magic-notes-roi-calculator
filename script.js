@@ -17,8 +17,8 @@ function calculateROI() {
     // Enforce minimum of 600 hours for both display and all downstream calculations
     totalHoursYear = Math.max(totalHoursYear, 600);
 
-    // Step 1A: Total Recording Hours Needed (users × (meeting hours + admin hours) × 47)
-    const totalRecordingHours = users * (notesHours + adminHours) * WEEKS_PER_YEAR;
+    // Step 1A: Total Recording Hours Needed (users × (meeting hours) × 47)
+    const totalRecordingHours = users * notesHours * WEEKS_PER_YEAR;
 
     // Step 2: Sliding scale for annual cost
     let rate = 5;
