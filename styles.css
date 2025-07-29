@@ -110,6 +110,16 @@ button:hover {
 .output-row:last-child {
     margin-bottom: 0;
 }
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+button:focus {
+    outline: 2px solid #353bff;         /* Strong visible outline */
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px #b3b7ff66;   /* Subtle focus glow */
+    z-index: 1;                         /* Ensure focus style is above other elements */
+}
+
 /* Responsive for mobile */
 @media (max-width: 700px) {
     .calculator {
