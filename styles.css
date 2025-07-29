@@ -77,8 +77,11 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px; /* This applies everywhere by default */
+    margin-bottom: 16px; /* Consistent spacing */
     font-size: 1.08em;
+}
+.output-row:last-child {
+    margin-bottom: 0;
 }
 
 .roi-row span:last-child {
@@ -103,12 +106,6 @@ button:hover {
 }
 .output-box:last-child {
     margin-bottom: 0;
-}
-.output-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
 }
 .output-row:last-child {
     margin-bottom: 0;
