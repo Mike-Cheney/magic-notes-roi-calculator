@@ -85,3 +85,24 @@ inputFields.forEach(input => {
         }
     });
 });
+
+function openTab(evt, tabId) {
+  // Hide all tab contents
+  var tabContents = document.getElementsByClassName('tab-content');
+  for (var i = 0; i < tabContents.length; i++) {
+    tabContents[i].style.display = 'none';
+  }
+  // Remove active class from all tab links
+  var tabLinks = document.getElementsByClassName('tab-link');
+  for (var i = 0; i < tabLinks.length; i++) {
+    tabLinks[i].classList.remove('active');
+  }
+  // Show the selected tab and set link as active
+  document.getElementById(tabId).style.display = 'block';
+  evt.currentTarget.classList.add('active');
+}
+
+// Optionally, open the first tab on page load
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('.tab-link').click();
+});
