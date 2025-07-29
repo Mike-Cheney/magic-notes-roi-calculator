@@ -107,9 +107,6 @@ button:hover {
 .output-box:last-child {
     margin-bottom: 0;
 }
-.output-row:last-child {
-    margin-bottom: 0;
-}
 
 input[type="number"]:focus,
 input[type="text"]:focus,
