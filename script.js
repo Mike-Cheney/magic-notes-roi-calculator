@@ -14,9 +14,11 @@ function calculateROI() {
 
     // Step 1: Total Magic Notes Hours per Year (users × notesHours × 47)
     let totalHoursYear = users * notesHours * WEEKS_PER_YEAR;
-
     // Enforce minimum of 600 hours for both display and all downstream calculations
     totalHoursYear = Math.max(totalHoursYear, 600);
+
+    // Step 1A: Total Recording Hours Needed (users × (meeting hours + admin hours) × 47)
+    const totalRecordingHours = users * (notesHours + adminHours) * WEEKS_PER_YEAR;
 
     // Step 2: Sliding scale for annual cost
     let rate = 5;
@@ -44,24 +46,22 @@ function calculateROI() {
     // Step 5: Financial value of time saved
     const financialValue = totalTimeSaved * hourlyCost;
 
-    // Step 6: ROI
-    const roi = annualCost > 0 ? ((financialValue - annualCost) / annualCost) * 100 : 0;
+    // Step 6: ROI Ratio
+    const ratio = annualCost > 0 ? (financialValue / annualCost) : 0;
 
-    // Output
-    document.getElementById('totalHoursYear').textContent = totalHoursYear.toLocaleString('en-GB');
+    // Output to new/updated element IDs
+    document.getElementById('totalRecordingHours').textContent = totalRecordingHours.toLocaleString('en-GB');
     document.getElementById('annualCost').textContent = formatGBP(annualCost);
     document.getElementById('timeSavedPerUser').textContent = timeSavedPerUser.toLocaleString('en-GB', { maximumFractionDigits: 2 });
     document.getElementById('totalTimeSaved').textContent = totalTimeSaved.toLocaleString('en-GB', { maximumFractionDigits: 2 });
     document.getElementById('financialValue').textContent = formatGBP(financialValue);
 
-    const roiElem = document.getElementById('roi');
-    roiElem.textContent = roi.toLocaleString('en-GB', { maximumFractionDigits: 2 }) + "%";
-    roiElem.classList.remove('positive-roi', 'negative-roi');
-    if (roi >= 0) {
-        roiElem.classList.add('positive-roi');
-    } else {
-        roiElem.classList.add('negative-roi');
-    }
+    // ROI Ratio line output
+    const roiLineElem = document.getElementById('roiLine');
+    roiLineElem.textContent = `For ${users} users, Magic Notes returns £${ratio.toFixed(2)} for every £1 spent.`;
+
+    // Remove all references to deprecated or replaced outputs
+    // (No update to #totalHoursYear, no update to #roi, and no classList logic)
 }
 
 document.getElementById('calculateBtn').addEventListener('click', calculateROI);
