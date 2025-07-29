@@ -122,10 +122,11 @@ button:focus {
 
 /* Responsive for mobile */
 @media (max-width: 700px) {
-    .calculator {
-        flex-direction: column;
-        padding: 12px 4vw;
+    .container {
+        padding-left: 2vw;
+        padding-right: 2vw;
     }
+}
     .inputs, .outputs {
         min-width: unset;
         padding: 0;
