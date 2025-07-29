@@ -94,7 +94,25 @@ button:hover {
 .negative-roi {
     color: #d32d2d;
 }
-
+.output-box {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 6px;
+    background: #fff;
+    margin-bottom: 20px;
+}
+.output-box:last-child {
+    margin-bottom: 0;
+}
+.output-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.output-row:last-child {
+    margin-bottom: 0;
+}
 /* Responsive for mobile */
 @media (max-width: 700px) {
     .calculator {
