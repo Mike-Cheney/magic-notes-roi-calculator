@@ -1,71 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Magic Notes ROI Calculator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Magic Notes ROI Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+    }
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #007bff;
+      background: #f9f9f9;
+    }
+    .tab-link {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      font-size: 1rem;
+      color: #444;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
+    }
+    .tab-link.active {
+      color: #007bff;
+      border-bottom: 3px solid #007bff;
+      font-weight: bold;
+    }
+    .tab-content {
+      display: none;
+      padding: 24px;
+      background: #fff;
+      min-height: 300px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    /* Optional: Style form and results */
+    form label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+    form input {
+      width: 200px;
+      padding: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      display: block;
+    }
+    form button {
+      padding: 8px 24px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    form button:hover {
+      background: #0056b3;
+    }
+    .results p {
+      margin: 8px 0;
+      font-size: 1.1em;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1 style="font-family: inherit; font-size: 2rem; font-weight: 500; margin-bottom: 1.5rem; text-align: center; letter-spacing: 0.02em;">
-  Magic Notes ROI Calculator
-</h1>
-    <div class="calculator">
-        <div class="inputs">
-            <h2>Inputs</h2>
-            <label>
-                Number of Users<br>
-                <input type="number" id="numUsers" min="1" value="10">
-            </label>
-            <label>
-                Meeting Time per Week (per user)<br>
-                <input type="number" id="notesHours" min="0" value="3">
-            </label>
-            <label>
-                Admin Time per Week (per user)<br>
-                <input type="number" id="adminHours" min="0" value="6">
-            </label>
-            <label>
-                Staff Cost per Hour (£)<br>
-                <input type="number" id="hourlyCost" min="1" value="25">
-            </label>
-            <button id="calculateBtn">Calculate Impact</button>
-        </div>
-     <div class="outputs">
-    <h2>Outputs</h2>
-    <div class="output-box" style="margin-bottom: 20px;">
-        <h3>Recording Hours and Cost</h3>
-        <div class="output-row">
-            <span>Total Recording Hours Needed:</span>
-            <span id="totalRecordingHours">—</span>
-        </div>
-        <div class="output-row">
-            <span>Magic Notes Annual Cost (£):</span>
-            <span id="annualCost">—</span>
-        </div>
-    </div>
-    <div class="output-box">
-        <h3>ROI Summary</h3>
-        <div class="output-row">
-            <span>Time Saved per User/Week (hrs):</span>
-            <span id="timeSavedPerUser">—</span>
-        </div>
-        <div class="output-row">
-            <span>Total Time Saved per Year (hrs):</span>
-            <span id="totalTimeSaved">—</span>
-        </div>
-        <div class="output-row">
-            <span>Value of Time Saved (£):</span>
-            <span id="financialValue">—</span>
-        </div>
-        <div class="output-row">
-    <span id="roiLine" class="roi-line" style="font-weight: 500;">&nbsp;</span>
-        </div>
-    </div>
+
+<div class="tabs">
+  <button class="tab-link active" onclick="openTab(event, 'calculator-tab')">Calculator</button>
+  <button class="tab-link" onclick="openTab(event, 'information-tab')">Information</button>
 </div>
-    </div>
+
+<div id="calculator-tab" class="tab-content active">
+  <h1>Magic Notes ROI Calculator</h1>
+  <form id="calculator-form">
+    <label for="numUsers">Number of Users:</label>
+    <input type="number" id="numUsers" name="numUsers" min="1" required>
+
+    <label for="notesHours">Notes Hours per User per Week:</label>
+    <input type="number" id="notesHours" name="notesHours" step="0.1" min="0" required>
+
+    <label for="adminHours">Admin Hours per User per Week:</label>
+    <input type="number" id="adminHours" name="adminHours" step="0.1" min="0" required>
+
+    <label for="hourlyCost">Hourly Cost (£):</label>
+    <input type="number" id="hourlyCost" name="hourlyCost" step="0.01" min="0" required>
+
+    <button type="button" id="calculateBtn">Calculate ROI</button>
+  </form>
+
+  <div class="results">
+    <p>Total Recording Hours: <span id="totalRecordingHours"></span></p>
+    <p>Annual Cost: <span id="annualCost"></span></p>
+    <p>Time Saved per User: <span id="timeSavedPerUser"></span></p>
+    <p>Total Time Saved: <span id="totalTimeSaved"></span></p>
+    <p>Financial Value: <span id="financialValue"></span></p>
+    <p id="roiLine"></p>
+  </div>
 </div>
-<script src="script.js"></script>
+
+<div id="information-tab" class="tab-content">
+  <h2>Information</h2>
+  <p>
+    Welcome to the Magic Notes ROI Calculator!<br>
+    <br>
+    Use the <b>Calculator</b> tab to estimate your potential return on investment.<br>
+    The <b>Information</b> tab can include explanations, support details, or helpful resources for users.<br>
+    <br>
+    <i>Tip: Customize this section with FAQs, contact info, or a description of how Magic Notes benefits your team.</i>
+  </p>
+</div>
+
+<script>
+  function openTab(evt, tabId) {
+    // Hide all tab contents
+    var tabContents = document.getElementsByClassName('tab-content');
+    for (var i = 0; i < tabContents.length; i++) {
+      tabContents[i].style.display = 'none';
+      tabContents[i].classList.remove('active');
+    }
+    // Remove active class from all tab links
+    var tabLinks = document.getElementsByClassName('tab-link');
+    for (var i = 0; i < tabLinks.length; i++) {
+      tabLinks[i].classList.remove('active');
+    }
+    // Show the selected tab and set link as active
+    document.getElementById(tabId).style.display = 'block';
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
+  }
+
+  // Optionally, open the first tab on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.tab-link.active').click();
+  });
+</script>
+
+<!-- Your existing script.js should also be included here as a <script src="script.js"></script> for calculator logic -->
+
 </body>
 </html>
