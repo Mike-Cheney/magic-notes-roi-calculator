@@ -123,7 +123,6 @@ button:focus {
         padding-left: 2vw;
         padding-right: 2vw;
     }
-}
     .inputs, .outputs {
         min-width: unset;
         padding: 0;
