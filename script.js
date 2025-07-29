@@ -1,30 +1,9 @@
 // Constants
 const WEEKS_PER_YEAR = 47;
-const HOURS_PER_WEEK = 37.5; // You can change this if needed
 
 // Utility Functions
 const formatGBP = value =>
     '£' + Number(value).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-const annualSalaryInput = document.getElementById('annualSalary');
-const hourlyCostInput = document.getElementById('hourlyCost');
-
-// Update Functions
-const updateHourlyFromSalary = () => {
-    const annualSalary = parseFloat(annualSalaryInput.value) || 0;
-    const hourly = annualSalary / (WEEKS_PER_YEAR * HOURS_PER_WEEK);
-    hourlyCostInput.value = hourly > 0 ? hourly.toFixed(2) : '';
-};
-
-const updateSalaryFromHourly = () => {
-    const hourly = parseFloat(hourlyCostInput.value) || 0;
-    const annualSalary = hourly * WEEKS_PER_YEAR * HOURS_PER_WEEK;
-    annualSalaryInput.value = annualSalary > 0 ? annualSalary.toFixed(2) : '';
-};
-
-// Event Listeners
-annualSalaryInput.addEventListener('input', updateHourlyFromSalary);
-hourlyCostInput.addEventListener('input', updateSalaryFromHourly);
 
 function calculateROI() {
     // Inputs
