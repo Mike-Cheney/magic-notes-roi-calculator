@@ -14,29 +14,23 @@ function calculateROI() {
 
     // Step 1: Total Magic Notes Hours per Year (users × notesHours × 47)
     let totalHoursYear = users * notesHours * WEEKS_PER_YEAR;
-    // Enforce minimum of 600 hours for both display and all downstream calculations
-    totalHoursYear = Math.max(totalHoursYear, 600);
+    // Enforce minimum of 500 hours for both display and all downstream calculations
+    totalHoursYear = Math.max(totalHoursYear, 500);
 
-    // Step 1A: Total Recording Hours Needed (users × (meeting hours) × 47)
     const totalRecordingHours = users * notesHours * WEEKS_PER_YEAR;
 
     // Step 2: Sliding scale for annual cost
-    // Enforce minimum of 500 hours for both display and all downstream calculations
-    totalHoursYear = Math.max(totalHoursYear, 500);
-    
-    // Step 2: Sliding scale for annual cost
-    let rate = 5;
-    if (totalHoursYear >= 150000) {
-        rate = 1.5;
+    let rate;
     if (totalHoursYear >= 250000) {
         rate = 1.3;
+    } else if (totalHoursYear >= 150000) {
+        rate = 1.5;
     } else if (totalHoursYear >= 100000) {
         rate = 1.75;
     } else if (totalHoursYear >= 50000) {
         rate = 2.25;
     } else if (totalHoursYear >= 25000) {
         rate = 3.0;
-    } else if (totalHoursYear >= 12000) {
     } else if (totalHoursYear >= 20000) {
         rate = 4.0;
     } else if (totalHoursYear >= 12000) {
@@ -44,7 +38,6 @@ function calculateROI() {
     } else {
         rate = 5.0;
     }
-    const annualCost = totalHoursYear * rate;
     let annualCost = totalHoursYear * rate;
     // Ensure minimum cost is £2,500 if hours are between 1 and 499
     if (totalHoursYear <= 500) {
@@ -73,9 +66,6 @@ function calculateROI() {
     // ROI Ratio line output
     const roiLineElem = document.getElementById('roiLine');
     roiLineElem.textContent = `For ${users} users, Magic Notes returns £${ratio.toFixed(2)} for every £1 spent.`;
-
-    // Remove all references to deprecated or replaced outputs
-    // (No update to #totalHoursYear, no update to #roi, and no classList logic)
 }
 
 document.getElementById('calculateBtn').addEventListener('click', calculateROI);
