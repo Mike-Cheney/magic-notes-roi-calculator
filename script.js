@@ -75,15 +75,3 @@ inputFields.forEach(input => {
         }
     });
 });
-
-document.getElementById('calculateBtn').addEventListener('click', calculateROI);
-
-// Optionally, perform calculation on Enter key in any input
-const inputFields = document.querySelectorAll('.inputs input');
-inputFields.forEach(input => {
-    input.addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-            calculateROI();
-        }
-    });
-});
