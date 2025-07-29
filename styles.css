@@ -134,3 +134,21 @@ button:focus {
         margin-top: 22px;
     }
 }
+
+/* Increase contrast on button hover for accessibility */
+button:hover,
+button:focus-visible {
+    background: #1d1fff;    /* Darker blue for higher contrast */
+    color: #fff;            /* Ensure text remains white for contrast */
+    border-color: #1517cc;  /* Slightly darker border on hover */
+}
+
+/* Style for disabled buttons */
+button:disabled,
+button[disabled] {
+    background: #b3b7ff;   /* Lighter, muted color */
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.7;
+    border-color: #b3b7ff;
+}
